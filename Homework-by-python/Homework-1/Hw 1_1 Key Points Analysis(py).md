@@ -1,0 +1,53 @@
+# KEY POINTS ANALYSIS
+
+```python
+def GCD(a,b):
+    if b==0:
+        return a
+    else:
+        return GCD(b,a%b)
+```
+
+## Key Concepts 1
+
+1. **Recursion**: The function calls itself to reduce the problem to smaller parts.
+2. **Modulus Operator `%`**: Used to find the remainder when `a` is divided by `b`.
+
+## Function Operation 1
+
+- `GCD(a, b)` calculates the Greatest Common Divisor of `a` and `b` using the Euclidean algorithm.
+- If `b == 0`, it returns `a`.
+- Otherwise, it recursively calls `GCD(b, a % b)`.
+
+***
+
+```python
+def LCM(a,b):
+    return a*b//GCD(a,b)
+```
+
+## Key Concepts 2
+
+1. **LCM (Least Common Multiple)**: The smallest multiple that is evenly divisible by both `a` and `b`.
+2. **Integer Division `//`**: Divides and rounds down to the nearest integer. (also called **Floor Division**)
+
+## Function Operation 2
+
+- `LCM(a, b)` calculates the Least Common Multiple of `a` and `b` using the formula \( \text{LCM}(a, b) = \frac{a \times b}{\text{GCD}(a, b)} \). (refer to contents of number theory)
+
+***
+
+```python
+a,b=map(int,input().split())
+```
+
+## Key Concepts 3
+
+1. **Tuple Unpacking**: `a, b = ...` assigns values to `a` and `b` simultaneously.
+2. **`map()` Function**: Applies the `int` function to each element in the list.
+3. **`input().split()`**: Reads a string from user input and splits it into a list.
+
+## Function Operation 3
+
+- This line takes a space-separated string input, splits it into a list, converts each element to an integer, and then assigns them to `a` and `b`.
+  
