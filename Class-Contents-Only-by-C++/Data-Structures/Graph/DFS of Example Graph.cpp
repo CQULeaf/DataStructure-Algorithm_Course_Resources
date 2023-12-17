@@ -16,9 +16,9 @@ public:
         visited[v] = true;
         cout << v << " ";
 
-        for (auto i = adj[v].begin(); i != adj[v].end(); ++i) {
-            if (!visited[*i]) {
-                DFS(*i);
+        for (int adjacent : adj[v]) {
+            if (!visited[adjacent]) {
+                DFS(adjacent);
             }
         }
     }
