@@ -62,3 +62,153 @@ BFS 算法实现大致步骤：
 
 通过这种方式，BFS 能够按照从近到远的顺序访问图中的每个顶点且 BFS 特别适合用于找到从起点到其他顶点的最短路径（在边权重相同的情况下）。
 
+### BFS代码实践
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+// 这个类表示使用邻接表的有向图
+class Graph {
+    int V;  // 顶点的数量
+    vector<vector<int>> adj; // 邻接表
+
+public:
+    Graph(int V) {
+        this->V = V;
+        adj.resize(V);
+    }
+
+    void addEdge(int v, int w) {
+        adj[v].push_back(w); // 在v的列表中添加w
+    }
+
+    void BFS(int s) {
+        vector<bool> visited(V, false); // 标记所有顶点为未访问
+        queue<int> queue; // 为BFS创建一个队列
+
+        visited[s] = true; // 标记当前节点为已访问并入队
+        queue.push(s);
+
+        while (!queue.empty()) {
+            s = queue.front();
+            cout << s << " ";
+            queue.pop();
+
+            for (int adjacent : adj[s]) {
+                if (!visited[adjacent]) {
+                    visited[adjacent] = true;
+                    queue.push(adjacent);
+                }
+            }
+        }
+    }
+};
+
+int main() {
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    cout << "下面是从顶点2开始的广度优先遍历(Breadth First Traversal)\n";
+    g.BFS(2);
+
+   system("pause");
+    return 0;
+}
+```
+
+### DFS基本算法思想
+
+[详细讲解图的DFS代码实现](https://b23.tv/XWotFVJ)
+
+深度优先搜索（Depth-First Search, DFS）是一种用于遍历或搜索树或图的算法。与广度优先搜索不同，深度优先搜索的核心思想是尽可能深地搜索图的分支。
+
+DFS 算法实现大致步骤：
+
+1. **选择起始点**：从一个顶点开始，作为搜索的起始点。
+
+2. **探索未访问的分支**：
+   - 访问当前顶点，并进行标记为已访问。
+   - 查找当前顶点的所有邻接顶点，对于每一个未访问的邻接顶点，继续进行深度优先搜索。
+
+3. **回溯**：当当前顶点的所有邻接顶点都已访问或没有邻接顶点时，回溯到上一个顶点，继续执行步骤2。
+
+4. **重复过程**：重复步骤2和3，直到所有可达的顶点都被访问到。
+
+关键点：
+
+- **递归实现**：DFS 通常通过**递归**来实现。在每一层递归中，选择一个邻接顶点进行探索，直到无法继续为止。
+- **使用栈**：除了递归，DFS 也可以使用**栈**来实现。在这种实现中，利用栈保存待访问的顶点。
+- **标记已访问顶点**：为了避免重复访问同一顶点，需要对已访问的顶点进行标记。
+
+DFS 的这种深入探索的特性使它非常适合于需要深度遍历的场景，如寻找所有可能的解决方案，检测环路，或者在图中搜索从一个顶点到另一个顶点的路径。由于它会尽可能深地探索，直到无法继续为止，然后回溯，因此它也适用于找到路径或者解决方案的所有可能性。
+
+### DFS代码实现
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+#include <list>
+using namespace std;
+
+class Graph {
+public:
+    unordered_map<int, bool> visited;// 用于标记顶点是否已被访问
+    unordered_map<int, list<int>> adj;// 邻接表
+
+    void addEdge(int v, int w) {
+        adj[v].push_back(w);
+    }
+
+    void DFS(int v) {
+        visited[v] = true;
+        cout << v << " ";
+
+        for (auto i = adj[v].begin(); i != adj[v].end(); ++i) {
+            if (!visited[*i]) {
+                DFS(*i);
+            }
+        }
+    }
+};
+
+int main() {
+    Graph g;
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    cout << "下面是从顶点2开始的深度优先遍历(Depth First Traversal)\n";
+    g.DFS(2);
+
+    system("pause");
+    return 0;
+}
+```
+
+#### `unordered_map` VS `vector`
+
+注意到，在BFS代码实现中我们用`vector`这一数据结构来存储图，而在DFS代码实现中我们用`unordered_map`来存储图。实际上，在实现BFS和DFS时，选择哪种数据结构来存储图（如`unordered_map`或`vector`）主要取决于图本身的特性以及特定的应用需求，而没有固定的要求，我们可以根据需要灵活选择。
+
+下面是两者的对比：
+
+| **特性/考量**         | **unordered_map**                                                                                                 | **vector**                                                                                           |
+|-------------------|---------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| **数据结构类型**     | 关联容器，基于哈希表实现。                                                                                           | 序列容器，提供快速的顺序访问。                                                                           |
+| **访问速度**         | 平均情况下访问时间为\(O(1)\)，但最坏情况下为\(O(n)\)。                                                                       | 访问时间总是\(O(1)\)。                                                                                  |
+| **内存分布**         | 内存分布不连续。                                                                                                | 内存分布连续。                                                                                      |
+| **顶点编号连续性**    | 适合处理顶点编号不连续或未知的图。                                                                                    | 适合处理顶点编号连续且数量已知的图。                                                                     |
+| **动态性**          | 可以动态地添加和删除顶点和边，更适合于动态变化的图。                                                                   | 在图结构固定时更有效，对动态变化的图可能不够灵活。                                                         |
+| **适用场景**        | 适用于复杂或大型图，特别是当顶点和边的添加/删除操作频繁时。                                                              | 适用于结构简单、顶点数量固定的图。                                                                     |
+| **性能考虑**        | 由于基于哈希表，性能可能受哈希函数和冲突处理机制的影响。                                                               | 由于内存连续，可以提供高效的缓存利用率，但可能在大型图中因为内存重新分配而影响性能。                            |
+| **初始化复杂性**     | 不需要提前知道顶点数量，更易于处理图的动态变化。                                                                        | 需要预先知道顶点数量以分配内存，适用于静态图。                                                           |
