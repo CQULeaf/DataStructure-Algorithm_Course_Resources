@@ -1,4 +1,4 @@
-# The ADT of Graph
+# 图结构的ADT
 
 1. **数据对象**：图的数据对象主要是顶点（Vertex）的集合。每个顶点都是图的一个基本单位。
 
@@ -25,7 +25,7 @@
    - `BFS(graph)`: 对图进行广度优先遍历。
    - `BFS(graph, v, visited)`: 从顶点 `v` 开始进行广度优先遍历，`visited` 记录顶点的访问标记。
 
-## The Implementation of ADT of Graph with adjMatrix
+## 邻接矩阵存储下的图ADT代码实现
 
 ```cpp
 #include <iostream>
@@ -105,7 +105,7 @@ public:
 };
 ```
 
-## The Implementation of ADT of Graph with adjList
+## 邻接表存储下的图ADT代码实现
 
 ```cpp
 #include <iostream>
