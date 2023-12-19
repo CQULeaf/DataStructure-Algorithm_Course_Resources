@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 // 定义最大容量
@@ -26,7 +25,7 @@ struct SeqList {
         }
         for (int j = length; j >= i; j--) {
             data[j] = data[j - 1];
-        }
+        }// 从最后一个元素开始，依次向后移动一个位置
         data[i - 1] = e;
         length++;
         return true;
@@ -39,13 +38,13 @@ struct SeqList {
         }
         for (int j = i; j < length; j++) {
             data[j - 1] = data[j];
-        }
+        }// 从位置i开始，依次向前移动一个位置
         length--;
         return true;
     }
 
     // 获取元素，位置i
-    bool Get(int i, ElemType &e) {
+    bool Get(int i, ElemType e) {
         if (i < 1 || i > length) {
             return false;
         }
@@ -53,12 +52,31 @@ struct SeqList {
         return true;
     }
 
+    // 获取元素e的位置
+    int Locate(ElemType e) {
+        for (int i = 0; i < length; i++) {
+            if (data[i] == e) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
+    // 翻转顺序表
+    void Reverse() {
+        for (int i = 0; i < length / 2; i++) {
+            ElemType temp = data[i];
+            data[i] = data[length - i - 1];
+            data[length - i - 1] = temp;
+        }
+    }
+
     // 打印顺序表所有元素
     void PrintList() {
         for (int i = 0; i < length; i++) {
-            std::cout << data[i] << " ";
+            cout << data[i] << " ";
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 };
 
@@ -67,13 +85,21 @@ int main() {
     list.InitList();   // 初始化顺序表
 
     // 测试插入
-    list.Insert(1, 10); // 在位置1插入元素10
-    list.Insert(2, 20); // 在位置2插入元素20
-    list.PrintList();   // 打印顺序表
+    list.Insert(1, 10); 
+    list.Insert(2, 20); 
+    list.Insert(3, 30); 
+    list.Insert(4, 40); 
+    list.PrintList();   
 
     // 测试删除
-    list.Remove(1);    // 删除位置1的元素
-    list.PrintList();  // 打印顺序表
+    list.Remove(1);    
+    list.PrintList();  
+    list.Remove(3);    
+    list.PrintList();  
+
+    // 测试翻转
+    list.Reverse();    
+    list.PrintList();  
 
     // 测试获取
     int elem;
@@ -83,7 +109,15 @@ int main() {
         cout << "Get operation failed!" << endl;
     }
 
-    // ...其他操作
+    // 测试定位
+    int pos = list.Locate(30);
+    if (pos != 0){
+        cout << "Element 30 is located at " << pos << endl;
+    }
+    else {
+        cout << "Element 30 is not found!" << endl;
+    }
 
+    system("pause");
     return 0;
 }

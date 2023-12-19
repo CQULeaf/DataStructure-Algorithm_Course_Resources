@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 // 定义元素类型，这里假设元素类型为int
@@ -73,9 +72,9 @@ struct LinkList {
             current = current->next;
         }
         ListNode* newNode = new ListNode();        // 创建新节点
-        newNode->data = e;                         // 设置新节点的数据
-        newNode->next = current->next;             // 新节点指向当前节点的下一个节点
-        current->next = newNode;                   // 当前节点的下一个节点是新节点
+        newNode->data = e;                         
+        newNode->next = current->next;             
+        current->next = newNode;                   
         length++;
         return true;
     }
@@ -88,8 +87,8 @@ struct LinkList {
             current = current->next;
         }
         ListNode* toDelete = current->next;    // 找到要删除的节点
-        current->next = toDelete->next;        // 前驱节点指向要删除节点的下一个节点
-        delete toDelete;                       // 释放要删除节点的内存
+        current->next = toDelete->next;        
+        delete toDelete;                       
         length--;
         return true;
     }
@@ -99,17 +98,17 @@ int main() {
     LinkList list; // 创建链表对象
     list.InitList(); // 初始化链表
 
-    // 可以在这里添加操作测试链表功能，例如：
-    list.Insert(1, 10); // 在链表第1个位置插入元素10
-    list.Insert(2, 20); // 在链表第2个位置插入元素20
+    // 插入元素
+    list.Insert(1, 10); 
+    list.Insert(2, 20); 
 
     int element;
     if(list.Get(2, element)) {
         cout << "Element at position 2 is: " << element << endl;
     }
 
-    // ...其他操作
-
     list.DestroyList(); // 销毁链表
+
+    system("pause");
     return 0;
 }
