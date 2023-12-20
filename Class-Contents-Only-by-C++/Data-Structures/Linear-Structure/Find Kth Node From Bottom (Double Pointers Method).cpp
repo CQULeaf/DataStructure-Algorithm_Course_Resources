@@ -19,7 +19,7 @@ ListNode* FindKthNodeFromBottom(ListNode* head, int k){
     // 移动fast指针，使其与slow指针之间相隔k个节点
     for (int i = 0; i < k; ++i){
         if (fast == nullptr){
-            return nullptr;// 预防k超出链表长度这一情况
+            return nullptr; // 预防k超出链表长度这一情况
         }
         fast = fast->next;
     }
@@ -90,5 +90,4 @@ int main(){
 
     system("pause");
     return 0;
-
 }
