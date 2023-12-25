@@ -12,12 +12,7 @@ def generate_permutations(arr, n, curr_permutation):
             generate_permutations(next_arr, n, curr_permutation)
             curr_permutation.pop()
 
-# Input handling
 N = int(input())
 arr = list(map(int, input().split()))
 
-# Ensure the array is sorted to produce lexicographically sorted output
-arr.sort()
-
-# Generate permutations
 generate_permutations(arr, N, [])
