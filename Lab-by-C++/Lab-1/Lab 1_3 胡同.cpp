@@ -8,22 +8,18 @@ using namespace std;
 string can_exit(const vector<int>& entry_sequence, const vector<int>& exit_sequence)
 {
     stack<int> s;
-    int entry_pointer = 0;
+    int entryIndex = 0;
 
     for(int car : exit_sequence)
     {
         while(s.empty() || s.top() != car)
         {
-            if (entry_pointer >= entry_sequence.size())
+            if (entryIndex >= entry_sequence.size())
                 return "No";
-            s.push(entry_sequence[entry_pointer]);
-            entry_pointer++;
+            s.push(entry_sequence[entryIndex]);
+            entryIndex++;
         }
-
-        if(s.empty() || s.top() != car)
-            return "No";
-        else
-            s.pop();
+        s.pop();
     }
     return "Yes";
 }
@@ -34,13 +30,12 @@ int main()
     cin >> T;
     vector<string> results;
 
-    for(int t = 0; t < T; t++)
-    {
+    while (T--) {
         int n;
         cin >> n;
         
         vector<int> cars(2*n);
-        for(int i = 0; i < 2*n; i++)
+        for(int i = 0; i < 2*n; ++i)
         {
             cin >> cars[i];
         }
@@ -48,7 +43,7 @@ int main()
         vector<int> entry_sequence(cars.begin(), cars.begin()+n);
         vector<int> exit_sequence(cars.begin() + n, cars.end());
 
-        results.push_back(can_exit(entry_sequence, exit_sequence));      
+        results.push_back(can_exit(entry_sequence, exit_sequence));  
     }
 
     for(const string& res : results)

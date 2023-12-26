@@ -13,17 +13,11 @@ string isValid(const string &s){
     };
 
     for (char character : s){
-        auto it = mapping.find(character);
-
-        // If character is a closing bracket
-        if (it != mapping.end()){
-            char topElement = myStack.empty() ? '#' : myStack.top();
-            myStack.pop();
-            
-            if (it->second != topElement)
+        if (mapping.find(character) != mapping.end()) {
+            if (myStack.empty() || myStack.top() != mapping[character])
                 return "Wrong";
+            myStack.pop();
         }
-        // If character is an opening bracket or other characters
         else {
             myStack.push(character);
         }
