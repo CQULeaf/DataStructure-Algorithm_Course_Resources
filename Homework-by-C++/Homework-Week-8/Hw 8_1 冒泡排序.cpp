@@ -2,18 +2,11 @@
 
 using namespace std;
 
-void exchange(int arr[], int i, int j)
-{
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
-
-void compare(int arr[], int i, int j, bool& exchanged)
+void exchange(int arr[], int i, int j, bool& exchanged)
 {
     if(arr[i] > arr[j])
     {
-        exchange(arr, i, j);
+        swap(arr[i], arr[j]);
         exchanged = true;
     }
 }
@@ -40,12 +33,12 @@ int main()
         cin >> arr[i];
     }
 
-    for(int i = 0; i < N-1; i++)
+    for(int i = 0; i < N - 1; i++)
     {
         bool exchanged = false;
-        for(int j = 0; j < N-1-i; j++)
+        for(int j = 0; j < N - 1 - i; j++)
         {
-            compare(arr, j , j+1, exchanged);
+            exchange(arr, j, j + 1, exchanged);
         }
         if(!exchanged)
             break;

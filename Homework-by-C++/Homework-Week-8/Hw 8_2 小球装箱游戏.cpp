@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>
+// #include <fstream>
 #include <vector>
 #include <algorithm>
 
@@ -15,6 +15,7 @@ struct Ball
 int main()
 {
 /*
+To pass all the tests, it seems that this snippet is unnecessary
     ifstream infile("ball.in");
     int N;
     infile >> N;
@@ -51,6 +52,7 @@ int main()
         else ++greenB;
     }
 /*
+To pass all the tests, it seems that this snippet is unnecessary
     ofstream outfile("ball.out");
     outfile << redA << " " << greenA << endl;
     outfile << redB << " " << greenB << endl;
@@ -59,5 +61,6 @@ int main()
     cout << redA << " " << greenA << endl;
     cout << redB << " " << greenB << endl;
     
+    system("pause");
     return 0;
 }
