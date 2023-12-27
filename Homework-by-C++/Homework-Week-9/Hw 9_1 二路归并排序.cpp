@@ -3,36 +3,43 @@
 
 using namespace std;
 
-void merge(vector<int>& arr, int left, int mid, int right) {
-    vector<int> temp;
-    int i = left, j = mid + 1;
+void merge(vector<int>& arr, int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
 
-    while (i <= mid && j <= right) {
-        if (arr[i] < arr[j]) {
-            temp.push_back(arr[i]);
+    vector<int> L(n1), R(n2);
+
+    for (int i = 0; i < n1; ++i) 
+        L[i] = arr[l + i];
+    for (int j = 0; j < n2; ++j)
+        R[j] = arr[m + j + 1];
+
+    int i = 0, j = 0, k = l;
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
             ++i;
         } else {
-            temp.push_back(arr[j]);
+            arr[k] = R[j];
             ++j;
         }
+        ++k;
     }
 
-    while (i <= mid) {
-        temp.push_back(arr[i]);
+    while (i < n1) {
+        arr[k] = L[i];
         ++i;
+        ++k;
     }
-
-    while (j <= right) {
-        temp.push_back(arr[j]);
+    while (j < n2) {
+        arr[k] = R[j];
         ++j;
-    }
-
-    for (int k = left, l = 0; k <= right; ++k, ++l) {
-        arr[k] = temp[l];
+        ++k;
     }
 
     // Display the entire array after each merge operation
-    for (size_t i = 0; i < arr.size(); ++i) {
+    for (int i = 0; i < arr.size(); ++i) {
         cout << arr[i];
         if (i < arr.size() - 1) {
             cout << ' ';
@@ -54,15 +61,14 @@ void merge_sort(vector<int>& arr, int left, int right) {
 
 int main() {
     int n;
-    while (cin >> n) {
-        vector<int> unsorted_arr(n);
-
-        for (int i = 0; i < n; ++i) {
-            cin >> unsorted_arr[i];
-        }
-
-        merge_sort(unsorted_arr, 0, n - 1);
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
     }
 
+    merge_sort(arr, 0, n - 1);
+
+    system("pause");
     return 0;
 }
