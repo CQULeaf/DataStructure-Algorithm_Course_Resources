@@ -51,6 +51,11 @@
       - [二路归并排序的性能分析](#二路归并排序的性能分析)
       - [二路归并排序的代码实现](#二路归并排序的代码实现)
     - [4.2 归并排序（Merge Sort）](#42-归并排序merge-sort)
+      - [归并排序的原理](#归并排序的原理)
+      - [自顶向下的归并排序(Top-Down Merge Sort)](#自顶向下的归并排序top-down-merge-sort)
+      - [自底向上的归并排序(Bottom-Up Merge Sort)](#自底向上的归并排序bottom-up-merge-sort)
+      - [归并排序的优化](#归并排序的优化)
+      - [归并排序的应用](#归并排序的应用)
 
 ## 排序引入：了解基本概念
 
@@ -429,6 +434,8 @@ public:
 
 ### 4.2 归并排序（Merge Sort）
 
+#### 归并排序的原理
+
 归并排序分为**自顶向下的归并排序**与**自底向上的归并排序**，两者算法的核心思想上是一致的：均使用归并思想与二路归并算法来实现排序。故两种方法性能一样，且均与二路归并排序相同，下面是对两者的列表比较：
 
 | 特性           | 自顶向下归并排序                        | 自底向上归并排序                        |
@@ -441,14 +448,39 @@ public:
 | 优化难易度      | 递归可能更容易理解和优化                  | 需要管理多个循环和索引，可能更难以优化         |
 | 适用数据结构   | 数组、链表                             | 主要是数组，链表也可以但较复杂              |
 
-***自顶向下的归并排序(Top-Down Merge Sort)***
+#### 自顶向下的归并排序(Top-Down Merge Sort)
 
 ![Top-Down Merge Sort](images/Top-Down%20Merge%20Sort.png)
 
 代码见`Top-Down Merge Sort.cpp`文件。
 
-***自底向上的归并排序(Bottom-Up Merge Sort)***
+#### 自底向上的归并排序(Bottom-Up Merge Sort)
 
 ![Bottom-Up Merge Sort](images/Bottom-Up%20Merge%20Sort.png)
 
 代码见`Bottom-Up Merge Sort.cpp`文件。
+
+#### 归并排序的优化
+
+- 优化要点
+
+1. **双数组交替使用**：使用两个数组，一个作为当前的输入数组（有序子序列的来源），另一个作为输出数组（存放合并结果）。
+
+2. **交替角色**：在每轮迭代中，输入和输出数组的角色互换。一开始，原数组是输入数组，临时数组是输出数组。在下一轮迭代中，角色互换，临时数组变为输入数组，原数组变为输出数组。
+
+3. **减少拷贝**：由于输入和输出数组交替变化，每次合并操作都直接在正确的数组中生成结果，减少了拷贝回原数组的需要。
+
+#### 归并排序的应用
+
+***合并两个有序单链表***
+
+[LeetCode NO.21: merge-two-sorted-lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+
+代码见`NO.21 Merge Two Sorted Lists.cpp`文件。
+
+***合并k个有序单链表***
+
+[LeetCode NO.23 merge-k-sorted-lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+
+代码见`NO.23 Merge K Sorted Lists.cpp`文件。
+
