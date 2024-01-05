@@ -1,43 +1,20 @@
 #include <iostream>
-#include <queue>
 
 using namespace std;
 
 struct TreeNode
 {
     int val;
-    TreeNode *left, *right;
-    TreeNode(int value, TreeNode* leftTree = nullptr, TreeNode* rightTree = nullptr) : 
+    TreeNode* left, * right;
+    TreeNode(int value, TreeNode* leftTree = nullptr, TreeNode* rightTree = nullptr) :
         val(value), left(leftTree), right(rightTree) {}
 };
 
-bool isOddEvenTree(TreeNode* root) {
-    if (!root) return true;
-    queue<TreeNode*> nodes;
-    queue<int> levels;
-    nodes.push(root);
-    levels.push(1);
-
-    while (!nodes.empty()) {
-        TreeNode* node = nodes.front();
-        int level = levels.front();
-        nodes.pop();
-        levels.pop();
-
-        if ((node->val % 2) == (level % 2)) return true;
-
-        if (node->left) {
-            nodes.push(node->left);
-            levels.push(level + 1);
-        }
-        if (node->right) {
-            nodes.push(node->right);
-            levels.push(level + 1);
-        }
-    }
-    return true;
+bool isOddEvenTree(TreeNode* node, int level) {
+    if (!node) return true;
+    if ((node->val % 2) != (level % 2)) return false;
+    return isOddEvenTree(node->left, level + 1) && isOddEvenTree(node->right, level + 1);
 }
-
 
 int main() {
     // 构建树
@@ -51,7 +28,7 @@ int main() {
     root->right->right = new TreeNode(9);
 
     // 验证是否是奇偶树
-    bool result = isOddEvenTree(root);
+    bool result = isOddEvenTree(root, 1);
     if (result) {
         cout << "这是一个奇偶树。" << endl;
     } else {
