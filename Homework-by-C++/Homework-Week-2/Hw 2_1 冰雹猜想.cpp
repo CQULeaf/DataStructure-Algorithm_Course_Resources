@@ -18,7 +18,8 @@ int hail_conjecture(int n, int count) {
     }
     number_list.push_back(1);
     for (int i = 0; i < count; ++i) {
-        cout << number_list[i] << " ";
+        if (i == count - 1) cout << number_list[i];
+        else cout << number_list[i] << " ";
     }
     cout << endl;
     return count;

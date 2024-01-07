@@ -24,7 +24,8 @@ int main()
         arr[j+1] = key;
         for(int k = 0;k < N; k++)
         {
-            cout << arr[k] << " ";
+            if (k == N - 1) cout << arr[k];
+            else cout << arr[k] << " ";
         }
         cout << endl;
     }
