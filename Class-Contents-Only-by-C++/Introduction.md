@@ -218,7 +218,7 @@
 通常采用以下几种常见的时间复杂度函数。如图所示，当\(n\)逐渐增大时，它们的时间复杂度由左到右依次增大：
 \( O(\log n) < O(n) < O(n \log n) < O(n^2) < O(n^3) < O(2^n) < O(n!) < O(n^n) \)
 
-![Commonly Used Complexity Functions](Commonly%20Used%20Complexity%20Functions.png)
+![Commonly Used Complexity Functions](images/Commonly%20Used%20Complexity%20Functions.png)
 
 ### 渐进表示法的计算
 
